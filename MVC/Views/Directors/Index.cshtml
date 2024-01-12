@@ -1,0 +1,84 @@
+﻿@model IEnumerable<DirectorModel>
+@*Generated from Custom Template.*@
+@*Model namespace using directive should be added to _ViewImports.cshtml.*@
+
+@{
+    ViewData["Title"] = "Directors";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+@if (TempData["Message"] is not null)
+{
+    <p class="bg-warning text-black">@TempData["Message"]</p>
+}
+
+@if (User.IsInRole("User"))
+{
+    <p>
+        <a asp-action="Create">Create New</a>
+    </p>
+}
+
+@{
+    int count = Model is not null ? Model.Count() : 0;
+    string countMessage = count == 0 ? "No directors found." : count + " " + (count == 1 ? "director" : "directors") + " found.";
+}
+<p class="bg-info text-black">@countMessage</p>
+
+@if (count > 0)
+{
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.FullNameOutput)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.BirthDateOutput)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.IsRetiredOutput)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.MoviesOutput) Count
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullNameOutput)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.BirthDateOutput)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IsRetiredOutput)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.MoviesOutput.Count)
+                    </td>
+                    <td class="text-end">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                            @if (User.IsInRole("User"))
+                            {
+                                @:&nbsp;|&nbsp;
+                                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                @:&nbsp;|&nbsp;
+                                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}
+
+

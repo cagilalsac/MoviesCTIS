@@ -1,0 +1,25 @@
+﻿@model DirectorModel
+@*Generated from Custom Template.*@
+@*Model namespace using directive should be added to _ViewImports.cshtml.*@
+
+@{
+    ViewData["Title"] = "Director Details";
+}
+
+<h1>@ViewData["Title"]</h1>
+
+<div>
+    <h4>Director</h4>
+    <hr />
+    <partial name="_Details" model="Model" />   
+</div>
+<div>
+    @if (User.IsInRole("User"))
+    {
+        <a asp-action="Edit" asp-route-id="@Model?.Id">Edit</a>@:&nbsp;|&nbsp;
+    }
+    <a asp-action="Index">Back to List</a>
+</div>
+
+
+

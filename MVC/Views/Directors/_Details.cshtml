@@ -1,0 +1,36 @@
+﻿@model DirectorModel
+
+<dl class="row">
+    <dt class="col-2">
+        @Html.DisplayNameFor(model => model.FullNameOutput)
+    </dt>
+    <dd class="col-10">
+        @Html.DisplayFor(model => model.FullNameOutput)
+    </dd>
+    <dt class="col-2">
+        @Html.DisplayNameFor(model => model.BirthDateOutput)
+    </dt>
+    <dd class="col-10">
+        @Html.DisplayFor(model => model.BirthDateOutput)
+    </dd>
+    <dt class="col-2">
+        @Html.DisplayNameFor(model => model.IsRetiredOutput)
+    </dt>
+    <dd class="col-10">
+        @Html.DisplayFor(model => model.IsRetiredOutput)
+    </dd>
+    <dt class="col-2">
+        @Html.DisplayNameFor(model => model.MoviesOutput)
+    </dt>
+    <dd class="col-10">
+        @{
+            string movies = "";
+            foreach (var movie in Model.MoviesOutput)
+            {
+                movies += movie.Name + " (" + movie.Year + ")";
+                movies += "<br />";
+            }
+        }
+        @Html.Raw(movies)
+    </dd>
+</dl>
