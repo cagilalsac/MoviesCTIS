@@ -1,5 +1,5 @@
 ﻿using Business.Models;
-using Business.Results.Bases;
+using DataAccess.Results.Bases;
 
 namespace Business.Services.Bases
 {
